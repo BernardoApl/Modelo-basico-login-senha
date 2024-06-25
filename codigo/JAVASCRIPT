@@ -1,0 +1,25 @@
+// Estrutura de dados com as taxas de câmbio
+const taxasDeCambio = {
+    BRL: { USD: 0.18, EUR: 0.15, GBP: 0.13, JPY: 20.22 },
+    USD: { BRL: 5.65, EUR: 0.83, GBP: 0.72, JPY: 109.89 },
+    EUR: { BRL: 6.58, USD: 1.21, GBP: 0.86, JPY: 129.97 },
+    GBP: { BRL: 7.81, USD: 1.38, EUR: 1.17, JPY: 150.41 },
+    JPY: { BRL: 0.05, USD: 0.0091, EUR: 0.0077, GBP: 0.0066 }
+};
+
+function converterMoeda() {
+    const valor = parseFloat(document.getElementById('valor').value);
+    const moedaOrigem = document.getElementById('moedaOrigem').value;
+    const moedaDestino = document.getElementById('moedaDestino').value;
+    //Valores validos
+
+    if (isNaN(valor) || valor <= 0) {
+        alert('Por favor, insira um valor válido.');
+        return;
+    }
+//taxa de cambio
+    const taxaDeCambio = taxasDeCambio[moedaOrigem][moedaDestino];
+    const valorConvertido = valor * taxaDeCambio;
+//valor convertido
+    document.getElementById('resultado').innerHTML = `${valor.toFixed(2)} ${moedaOrigem} = ${valorConvertido.toFixed(2)} ${moedaDestino} (Taxa de Câmbio: 1 ${moedaOrigem} = ${taxaDeCambio.toFixed(4)} ${moedaDestino})`;
+}
